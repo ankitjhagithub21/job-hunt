@@ -5,6 +5,8 @@ const userSchema = new mongoose.Schema({
   fullName: {
     type: String,
     required: true,
+    trim:true,
+    minlength:3
   },
   email: {
     type: String,
@@ -45,7 +47,7 @@ const userSchema = new mongoose.Schema({
     },
     profilePhoto:{
         type:String,
-        default:""
+        default:"https://cdn-icons-png.flaticon.com/512/219/219983.png"
     }
   },
 },{timestamps:true,versionKey:false});

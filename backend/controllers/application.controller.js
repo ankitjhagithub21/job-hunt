@@ -112,7 +112,12 @@ export const getApplicants = async(req,res) => {
 }
 
 export const updateStatus = async(req,res) => {
-    
+   
+
+    if(req.role !== "recruiter"){
+        return res.status(400).json({success:false,message:"You can't change application status"})
+    }
+
     try{
        const {status} = req.body;
 
@@ -121,7 +126,7 @@ export const updateStatus = async(req,res) => {
         return res.status(400).json({success:false,message:"Status is required."})
 
        }
-       const applicationId = req.params.id
+       const applicationId = req.params.id;
        
        const application = await Application.findById(applicationId);
 
@@ -138,7 +143,8 @@ export const updateStatus = async(req,res) => {
 
         res.status(200).json({
             message:"Application updated succcessfully.",
-           success:true 
+           success:true ,
+           application
         })
     }catch(error){
         console.log(error.message)
