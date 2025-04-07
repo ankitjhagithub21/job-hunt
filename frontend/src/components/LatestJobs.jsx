@@ -1,7 +1,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation,Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
 
 
 const LatestJobs = () => {
@@ -15,7 +16,9 @@ const LatestJobs = () => {
                     spaceBetween={50}
                     slidesPerView={3}
                     navigation={true}  
-                    modules={[Navigation]} 
+                    autoplay={true}
+                    
+                    modules={[Navigation,Autoplay]} 
                     breakpoints={{
                         320: {
                             slidesPerView: 1,

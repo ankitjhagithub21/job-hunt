@@ -5,7 +5,7 @@ const Hero = () => {
     return (
         <section className="bg-white py-16" >
             <div className="max-w-7xl mx-auto px-6 text-center">
-                <h2 className="md:text-4xl text-2xl font-bold mb-4 text-gray-800">Find Your Dream Job</h2>
+                <h2 className="md:text-4xl text-2xl font-bold mb-4 text-gray-800">Find Your <span className='text-purple-600'>Dream</span> Job</h2>
                 <p className="md:text-xl text-lg  mb-8">Search jobs, view recommendations, and apply directly through our portal.</p>
 
                 {/* Search Bar */}
