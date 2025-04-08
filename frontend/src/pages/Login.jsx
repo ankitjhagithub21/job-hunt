@@ -24,7 +24,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json"
         },
-        credentials:'include',
+        credentials: 'include',
         body: JSON.stringify(userData)
       })
       const data = await res.json();
@@ -51,31 +51,40 @@ const Login = () => {
 
           <div className="flex flex-col gap-1">
             <label htmlFor="email" className="text-gray-800 text-sm">Email</label>
-            <input type="email" id="email" name="email" className="border rounded-xl border-gray-300 text-lg px-4 py-2" required />
+            <input type="email" id="email" name="email" className="border rounded-xl border-gray-300 text-lg focus:outline-none focus:ring-3 focus:ring-purple-500 px-4 py-2" required />
           </div>
 
           <div className="flex flex-col gap-1 mb-1">
             <label htmlFor="password" className="text-gray-800 text-sm">Password</label>
-            <div className="border rounded-xl flex items-center border-gray-300 text-lg px-4 py-2">
-              <input type={showPassword ? 'text' : 'password'} id="password" name="password" className="outline-none w-full bg-transparent" required />
-              <button className="cursor-pointer text-gray-800" type="button" onClick={() => setShowPassword(!showPassword)}>
-                {
-                  showPassword ? <FaEyeSlash /> : <FaEye />
-                }
+            <div className="border focus-within:ring-2 focus-within:ring-purple-500 focus-within:border-purple-500 rounded-xl flex items-center border-gray-300 text-lg px-4 py-2">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                className="outline-none w-full bg-transparent"
+                required
+              />
+              <button
+                className="cursor-pointer text-gray-800"
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-
           </div>
+
+
           <div className="flex flex-col gap-1">
             <label htmlFor="role" className="text-gray-800 text-sm">Role</label>
             <div className="flex  gap-10 items-center">
               <div className="flex items-center gap-1">
-                <input type="radio" id="student" name="role" value="student" required/>
-                <label htmlFor="student">Student</label>
+                <input type="radio" id="student" name="role" value="student" required />
+                <label htmlFor="student" className="cursor-pointer">Student</label>
               </div>
               <div className="flex items-center gap-1">
-                <input type="radio" id="recruiter" name="role" value="recruiter" required/>
-                <label htmlFor="recruiter">Recruiter</label>
+                <input type="radio" id="recruiter" name="role" value="recruiter" required />
+                <label htmlFor="recruiter" className="cursor-pointer">Recruiter</label>
               </div>
             </div>
           </div>

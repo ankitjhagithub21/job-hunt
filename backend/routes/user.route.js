@@ -5,10 +5,14 @@ import { upload } from "../middlewares/multer.js";
 
 const router = express.Router();
 
+const fields = [
+    { name: 'profilePhoto', maxCount: 1 },
+    { name: 'resume', maxCount: 1 }
+]
 
 router.post("/register",register)
 router.post("/login",login)
-router.post("/update/profile",isAuth,upload.single('resume'),updateProfile)
+router.post("/update/profile",isAuth,upload.fields(fields),updateProfile)
 router.get("/logout",logout)
 
 export default router;

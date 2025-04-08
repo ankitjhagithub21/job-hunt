@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 import { setUser } from "../app/slices/authSlice"
 
 
@@ -8,8 +9,19 @@ const Navbar = () => {
     const {user} = useSelector(state=>state.auth)
     const [isOpen,setIsOpen] = useState(false)
     const dispatch = useDispatch()
-    const handleLogout = () => {
-        dispatch(setUser(null))
+    const handleLogout = async() => {
+        try{
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/logout`);
+            
+            if(res.ok){
+               
+                dispatch(setUser(null))
+                toast.success("Logout successfull.")
+            }
+        }catch(error){
+            console.log(error)
+        }
+      
     }
     return (
         <header className="custom-shadow z-50 text-gray-800 sticky top-0 px-3 bg-white">
@@ -34,8 +46,8 @@ const Navbar = () => {
                         <img src={user.profile.profilePhoto} alt="profile" className="w-10 h-10 rounded-full object-cover"/>
                       {
                         isOpen ?   <div className="absolute flex flex-col items-start gap-2 custom-shadow rounded-xl top-10 bg-white w-44 p-5 right-3">
-                        <Link to={"/profile"}>Your Profile</Link>
-                        <button  onClick={handleLogout}>Logout</button>
+                        <Link to={"/profile"} className="hover:underline">Your Profile</Link>
+                        <button  onClick={handleLogout} className="hover:underline">Logout</button>
                     </div> : ''
                       }
                     </div> :  <Link to={"/login"} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 cursor-pointer">Login</Link>
