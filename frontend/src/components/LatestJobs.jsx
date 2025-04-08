@@ -3,11 +3,18 @@ import { Navigation,Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const LatestJobs = () => {
-    const jobs = ['Software Engineer', 'Product Manager', 'Data Analyst', 'UI/UX Designer',"Frontend Developer","Backend Developer"];
+   
+    const {allJobs} = useSelector(state=>state.job);
+    const navigate = useNavigate();
 
+    if(allJobs.length===0){
+        return <p className='text-center py-10 px-5 text-xl'>No job available.</p>
+    }
     return (
         <section className="py-16 bg-gray-50">
             <div className="max-w-7xl mx-auto px-6 text-center">
@@ -35,12 +42,12 @@ const LatestJobs = () => {
                     }}
                 >
                     {
-                        jobs.slice(0,6).map((job, index) => {
+                        allJobs.slice(0,6).map((job) => {
                             return (
-                                <SwiperSlide key={index}>
-                                    <div className="flex-shrink-0 my-5 w-64 mx-auto bg-white rounded-lg custom-shadow p-6">
-                                        <h3 className="text-xl font-semibold mb-3">{job}</h3>
-                                        <p className="text-gray-600 mb-4">Location: Remote</p>
+                                <SwiperSlide key={job._id}>
+                                    <div className="flex-shrink-0 my-5 w-64 mx-auto bg-white rounded-lg custom-shadow p-6" onClick={()=>navigate(`/job/${job._id}`)}>
+                                        <h3 className="text-xl font-semibold mb-3">{job.title}</h3>
+                                        <p className="text-gray-600 mb-4">Location: {job.location}</p>
                                         <button className="w-full cursor-pointer hover:bg-purple-700 bg-purple-600 text-white py-2 rounded-lg">Apply Now</button>
                                     </div>
                                 </SwiperSlide>

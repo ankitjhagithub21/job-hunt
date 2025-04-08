@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
+import { CiUser,CiLogout } from "react-icons/ci"
 import { setUser } from "../app/slices/authSlice"
 
 
@@ -45,9 +46,15 @@ const Navbar = () => {
                     user ? <div className="relative cursor-pointer border-2 rounded-full border-gray-200 " onClick={()=>setIsOpen(!isOpen)}>
                         <img src={user.profile.profilePhoto} alt="profile" className="w-10 h-10 rounded-full object-cover"/>
                       {
-                        isOpen ?   <div className="absolute flex flex-col items-start gap-2 custom-shadow rounded-xl top-10 bg-white w-44 p-5 right-3">
-                        <Link to={"/profile"} className="hover:underline">Your Profile</Link>
-                        <button  onClick={handleLogout} className="hover:underline">Logout</button>
+                        isOpen ?   <div className="absolute flex flex-col items-start gap-2 custom-shadow rounded-xl top-10 bg-white w-44 px-2 py-4 right-3">
+                        <Link to={"/profile"} className="flex gap-2 w-full p-2 rounded-lg hover:bg-gray-100 items-center">
+                        <CiUser size={20}/>
+                        View Profile
+                        </Link>
+                        <button  onClick={handleLogout} className="flex gap-2 w-full p-2 rounded-lg items-center bg-gray-100 hover:bg-gray-200">
+                            <CiLogout size={20}/>
+                            Logout
+                            </button>
                     </div> : ''
                       }
                     </div> :  <Link to={"/login"} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 cursor-pointer">Login</Link>

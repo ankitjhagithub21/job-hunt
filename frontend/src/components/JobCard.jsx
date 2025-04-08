@@ -1,15 +1,21 @@
 import { FaRegBookmark } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
-const JobCard = () => {
+const JobCard = ({job}) => {
   const navigate = useNavigate();
-  const job ={
-    _id:123456,
+  
+  const daysAgo = (time) => {
+    const createdAt = new Date(time);
+    const currTime = new Date();
+    const timeDiff = currTime-createdAt;
+
+    return Math.floor(timeDiff/(24*60*60*1000))
   }
+
   return (
     <div className='flex flex-col gap-2 p-4 custom-shadow rounded-lg'>
-      <div className='flex items-center justify-between'>
-        <span className='text-sm'>2 days ago</span>
+      <div className='flex items-center justify-between mb-1'>
+        <span className='text-sm'>{daysAgo(job.createdAt) === 0 ? 'Today' : `${daysAgo(job.createdAt) }days ago`}</span>
         <FaRegBookmark />
       </div>
       <div className='flex gap-3 items-center'>
@@ -17,21 +23,21 @@ const JobCard = () => {
           <img src="https://mailmeteor.com/logos/assets/PNG/Microsoft_Logo_512px.png" alt="company_logo" className='w-10 h-10 rounded-lg object-cover' />
         </div>
         <div className='flex flex-col gap-1 items-start justify-center'>
-          <h5 className='font-semibold leading-4 text-gray-900'>Company Name</h5>
-          <h6 className='text-sm leading-3'>Location</h6>
+          <h5 className='font-semibold leading-4 text-gray-900'>{job.company.name}</h5>
+          <h6 className='text-sm leading-3'>{job.location}</h6>
         </div>
       </div>
-      <h2 className='text-xl font-semibold text-gray-900'>Title</h2>
-      <p className='leading-5 text-sm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem laborum ipsam pariatur, harum dolor, eius nihil fugit provident deleniti esse voluptatibus nesciunt, minima repudiandae dolorem corporis commodi officia itaque quas?</p>
+      <h2 className='text-xl font-semibold text-gray-900'>{job.title}</h2>
+      <p className='leading-5 text-sm'>{job.description}</p>
       <div className='flex items-center my-2 text-sm gap-3 font-semibold'>
         <span className='rounded-full px-4 py-1 border  border-gray-200'>
-          12 positions
+          {job.positions} positions
         </span>
         <span className='rounded-full text-purple-600 px-3 py-1 border border-gray-200'>
-          Part time
+          {job.jobType}
         </span>
         <span className='rounded-full text-green-600 px-3 py-1 border border-gray-200'>
-          12 lpa
+          {job.salary} 
         </span>
       </div>
       <button onClick={()=>navigate(`/job/${job._id}`)} type='button' className='text-sm rounded-lg cursor-pointer hover:bg-gray-100 border border-gray-300 px-4 py-2 text-gray-800'>Details</button>

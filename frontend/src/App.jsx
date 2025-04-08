@@ -8,6 +8,7 @@ import "./App.css"
 import Browse from "./pages/Browse"
 import Profile from "./pages/Profile"
 import JobDetails from "./pages/JobDetails"
+import NotFound from "./pages/NotFound"
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
       <Route path="/job/:id" element={<JobDetails/>}/>
       <Route path="/browse" element={<Browse/>}/>
       <Route path="/profile" element={<Profile/>}/>
+      <Route path="/*" element={<NotFound/>}/>
       </Routes>
      
     </BrowserRouter>

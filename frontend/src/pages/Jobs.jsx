@@ -1,8 +1,9 @@
 
+import { useSelector } from 'react-redux'
 import JobCard from '../components/JobCard'
 
 const Jobs = () => {
-
+   const {allJobs} = useSelector(state=>state.job)
     const filterData = [
         {
             filterType:"Location",
@@ -46,8 +47,8 @@ const Jobs = () => {
         <div className='max-w-7xl flex-1 h-[80vh] overflow-y-scroll p-5 text-gray-800 mx-auto w-full'>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5'>
                 {
-                    [1,2,3,4,5,6].map((job,index)=>{
-                        return <JobCard key={index}/>
+                    allJobs.map((job)=>{
+                        return <JobCard key={job._id} job={job}/>
                     })
                 }
             </div>
