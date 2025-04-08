@@ -10,7 +10,7 @@ cloudinary.config({
 });
 
 const options = {
-  folder: "Job Hunt",
+  folder: "job-hunt",
   resource_type: "auto" 
 };
 
