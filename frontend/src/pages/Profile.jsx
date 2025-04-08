@@ -1,11 +1,23 @@
 
 import { CiMail, CiPhone } from "react-icons/ci";
+import { FaEdit } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import UpdateProfile from "../components/UpdateProfile";
+import { useState } from "react";
 const Profile = () => {
   const user = useSelector(state=>state.auth.user)
+  const [isOpen,setIsOpen] = useState(false)
+  if(!user){
+    return <p className="p-5 text-2xl">You are not logged in.</p>
+  }
+
   return (
-    <section className="px-5">
-      <div className="max-w-3xl w-full mx-auto">
+    <section className=" relative min-h-screen w-full  px-5">
+     {
+      user && isOpen && <UpdateProfile setIsOpen={setIsOpen} user={user}/>
+     }
+      <div className="max-w-3xl relative mx-auto">
+        <FaEdit onClick={()=>setIsOpen(true)} size={20} cursor={"pointer"} className="absolute text-gray-700 text-xl top-5 right-5 rounded-lg "/>
         <div className=" p-5 border my-10 rounded-lg border-gray-200 w-full">
           <div className="flex md:flex-row flex-col items-center gap-5">
             <div>
@@ -25,7 +37,7 @@ const Profile = () => {
             <span>{user.phone}</span>
           </div>
           <h2 className="p-5 text-2xl">Skills</h2>
-          <div className="flex flex-wrap gap-5 px-5">
+          <div className="flex flex-wrap gap-3 px-5">
             {
               user.profile.skills.length === 0 ? <p className="text-gray-800">You have not added any skills.</p> :
               user.profile.skills.map((skill, index) => {

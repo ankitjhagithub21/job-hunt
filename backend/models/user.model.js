@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   profile: {
-    bio: { type: String, maxlength:50, trim:true },
+    bio: { type: String, trim:true },
     skills: [
       {
         type: String,

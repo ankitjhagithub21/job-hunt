@@ -121,8 +121,8 @@ export const logout = (req,res) => {
 
 export const updateProfile =  async(req,res) => {
     
-    const {fullName,email,phone,bio,skills} = req.body;
-    
+    const {fullName,phone,bio,skills} = req.body;
+
     let skillsArray;
     
     if(skills){
@@ -141,7 +141,6 @@ export const updateProfile =  async(req,res) => {
         }
     
         if(fullName) user.fullName = fullName;
-        if(email) user.email = email;
         if(phone) user.phone = phone;
         if(bio) user.profile.bio = bio;
         if(skills) user.profile.skills = skillsArray

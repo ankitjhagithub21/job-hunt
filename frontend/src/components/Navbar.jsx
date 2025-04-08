@@ -12,7 +12,7 @@ const Navbar = () => {
         dispatch(setUser(null))
     }
     return (
-        <header className="custom-shadow text-gray-800 sticky top-0 px-3 bg-white">
+        <header className="custom-shadow z-50 text-gray-800 sticky top-0 px-3 bg-white">
             <div className="max-w-7xl w-full mx-auto py-3 flex items-center justify-between">
                 <div>
                     <Link to={"/"} className="text-2xl font-bold">Job<span className="text-purple-800">Hunt</span> </Link>
