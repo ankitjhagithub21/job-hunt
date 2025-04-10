@@ -1,4 +1,5 @@
 import { Company } from "../models/company.model.js";
+import { uploadFile } from "../utils/cloudinary.js";
 
 export const registerCompany = async (req, res) => {
   if (req.role !== "recruiter") {
@@ -8,6 +9,7 @@ export const registerCompany = async (req, res) => {
   }
 
   const { name } = req.body;
+
 
   if (!name) {
     return res
@@ -23,7 +25,7 @@ export const registerCompany = async (req, res) => {
         .status(400)
         .json({ message: "Company name already found.", success: false });
     }
-
+    
     company = await Company.create({
       name,
       userId: req.id,
@@ -80,11 +82,11 @@ export const updateCompany = async (req, res) => {
 
   const companyId = req.params.id;
 
+   const {name,location,description,website} = req.body;
+ 
+   
   try {
-    let company = await Company.findByIdAndUpdate(companyId, req.body, {
-      runValidators: true,
-      new: true,
-    });
+    let company = await Company.findById(companyId);
 
     if (!company) {
       return res
@@ -92,6 +94,20 @@ export const updateCompany = async (req, res) => {
         .json({ message: "Company not found.", success: false });
     }
 
+    if(name) company.name = name;
+    if(location) company.location = location;
+    if(description) company.description = description;
+    if(website) company.website = website;
+
+    if(req.file){
+       const url = await uploadFile(req.file.path);
+       if(url){
+         company.logo = url;
+       }
+    }
+
+   await company.save(); 
+ 
     res.status(200).json({
       success: true,
       company,

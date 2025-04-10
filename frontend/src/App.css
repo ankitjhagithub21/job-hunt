@@ -1,16 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-*{
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+* {
   font-family: "Outfit", sans-serif;
 }
-*::-webkit-scrollbar{
+*::-webkit-scrollbar {
   display: none;
 }
-.custom-shadow{
+.custom-shadow {
   box-shadow: rgba(71, 69, 69, 0.35) 0px 5px 15px;
-
 }
 
-button{
+button {
   outline: none;
   cursor: pointer;
 }

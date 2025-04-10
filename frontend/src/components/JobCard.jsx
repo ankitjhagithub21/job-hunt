@@ -17,9 +17,9 @@ const JobCard = ({job}) => {
         <FaRegBookmark />
       </div>
       <div className='flex gap-3 items-center'>
-        <div>
-          <img src="https://mailmeteor.com/logos/assets/PNG/Microsoft_Logo_512px.png" alt="company_logo" className='w-10 h-10 rounded-lg object-cover' />
-        </div>
+        
+          <img src={job.company.logo || "/logo.jpg"} alt="company_logo" className='w-10 h-10 rounded-lg object-cover' />
+        
         <div className='flex flex-col gap-1 items-start justify-center'>
           <h5 className='font-semibold leading-4 text-gray-900'>{job.company.name}</h5>
           <h6 className='text-sm leading-3'>{job.location}</h6>

@@ -6,19 +6,26 @@ const companySchema = new mongoose.Schema(
       type: String,
       required: true,
       unique:true
+
     },
+
     description: {
       type: String,
+      default:""
     },
+
     website: {
       type: String,
+      default:""
     },
     location: {
       type: String,
+      default:""
     },
 
     logo: {
       type: String,
+      default:""
     },
 
     userId: {
