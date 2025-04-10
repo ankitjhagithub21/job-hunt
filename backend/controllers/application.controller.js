@@ -85,11 +85,12 @@ export const getApplicants = async (req, res) => {
   try {
     const jobId = req.params.id;
 
-    const job = await Job.findById(jobId).populate({
+    const job = await Job.findById(jobId).select('applications').populate({
       path: "applications",
       options: { sort: { createdAt: -1 } },
       populate: {
         path: "applicant",
+        select:"-password"
       },
     });
 
@@ -100,7 +101,7 @@ export const getApplicants = async (req, res) => {
       });
     }
 
-    res.status(200).json(job);
+    res.status(200).json(job.applications);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: "Server error.", success: false });
@@ -137,10 +138,15 @@ export const updateStatus = async (req, res) => {
 
     await application.save();
 
+    const data = await application.populate({
+      path:"applicant",
+      select:"-password"
+    })
+
     res.status(200).json({
       message: "Application updated succcessfully.",
       success: true,
-      application,
+      application:data,
     });
   } catch (error) {
     console.log(error.message);

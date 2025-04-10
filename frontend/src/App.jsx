@@ -18,6 +18,8 @@ import { useDispatch } from "react-redux"
 import { setUser } from "./app/slices/authSlice"
 import { toast } from "react-toastify"
 import SetupCompany from "./admin/SetupCompany"
+import AdminJobs from "./admin/AdminJobs"
+import Applicants from "./admin/Applicants"
 
 
 const App = () => {
@@ -52,6 +54,8 @@ const App = () => {
 
           <Route index element={<AdminHome />} />
           <Route path="companies" element={<Companies />} />
+          <Route path="jobs" element={<AdminJobs />} />
+          <Route path="jobs/:id/applicants" element={<Applicants />} />
           <Route path="jobs/create" element={<CreateJob />} />
           <Route path="companies/create" element={<CreateCompany />} />
           <Route path="companies/setup/:id" element={<SetupCompany />} />

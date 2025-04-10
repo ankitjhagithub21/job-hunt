@@ -93,8 +93,10 @@ const SetupCompany = () => {
 
     return (
         <div className="w-full p-5 custom-shadow rounded-xl">
-            <button className="btn btn-primary" onClick={()=>navigate(-1)}>Back</button>
-            <h1 className="text-3xl font-medium p-5">Setup Company</h1>
+           <div className="px-5">
+           <button className="btn btn-primary" onClick={()=>navigate(-1)}>Back</button>
+           </div>
+            <h1 className="text-3xl font-medium p-5">Company Setup</h1>
             <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row flex-wrap">
                 {[
                     { label: "Company Name", name: "name", type: "text" },
