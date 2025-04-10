@@ -1,7 +1,15 @@
-import React from 'react';
-import { FaSearch } from 'react-icons/fa'; // To add a search icon
+import React, { useState } from 'react';
+import { FaSearch } from 'react-icons/fa'; 
+import { useNavigate } from 'react-router-dom'; 
 
 const Hero = () => {
+    const [query,setQuery] = useState('')
+    const navigate = useNavigate()
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate(`/browse?query=${query}`)
+    }
     return (
         <section className="bg-white py-16" >
             <div className="max-w-7xl mx-auto px-6 text-center">
@@ -9,16 +17,18 @@ const Hero = () => {
                 <p className="md:text-xl text-lg  mb-8">Search jobs, view recommendations, and apply directly through our portal.</p>
 
                 {/* Search Bar */}
-                <div className="relative mx-auto max-w-lg">
+                <form className="relative mx-auto max-w-lg" onSubmit={handleSubmit}>
                     <input
                         type="text"
+                        value={query}
+                        onChange={(e)=>setQuery(e.target.value)}
                         placeholder="Search for jobs..."
                         className="w-full py-3 px-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                     />
                     <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
                         <FaSearch className="text-gray-500" />
                     </div>
-                </div>
+                </form>
             </div>
         </section >
 
