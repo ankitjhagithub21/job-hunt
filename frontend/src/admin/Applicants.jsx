@@ -18,7 +18,7 @@ const Applicants = () => {
                 body: JSON.stringify({ status })
             });
             const resData = await res.json();
-            console.log(resData)
+
             if (resData.success) {
                 toast.success(resData.message);
 

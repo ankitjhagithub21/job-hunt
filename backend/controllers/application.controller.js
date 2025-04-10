@@ -64,15 +64,15 @@ export const getAppliedJobs = async (req, res) => {
 
     const applications = await Application.find({ applicant: userId }).sort({
       createdAt: -1,
-    });
-    // .populate({
-    //     path:"job",
-    //     options:{sort:{createdAt:-1}},
-    //     populate:{
-    //         path:"company",
-    //         options:{sort:{createdAt:-1}},
-    //     }
-    // })
+    })
+    .populate({
+        path:"job",
+        options:{sort:{createdAt:-1}},
+        populate:{
+            path:"company",
+            options:{sort:{createdAt:-1}},
+        }
+    })
 
     res.status(200).json(applications);
   } catch (error) {
