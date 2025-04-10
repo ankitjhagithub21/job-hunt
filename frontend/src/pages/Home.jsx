@@ -6,11 +6,11 @@ import useGetAllJobs from "../hooks/useGetAllJobs"
 const Home = () => {
   useGetAllJobs();
   return (
-    <div>
+    <>
       <Hero/>
       <LatestJobs/>
-      <Footer/>
-    </div>
+     
+    </>
   )
 }
 

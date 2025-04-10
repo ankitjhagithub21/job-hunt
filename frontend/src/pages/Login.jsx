@@ -44,8 +44,8 @@ const Login = () => {
   }
 
   return (
-    <section className="px-5 py-10">
-      <div className="max-w-xl mx-auto custom-shadow p-8 rounded-xl ">
+    <section className="h-screen w-full flex items-center justify-center p-5">
+      <div className="max-w-xl  mx-auto custom-shadow p-8 rounded-xl ">
         <h1 className="text-2xl font-bold  mb-3 text-gray-800">Login</h1>
         <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
 

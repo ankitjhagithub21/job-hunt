@@ -1,21 +1,19 @@
 import { FaRegBookmark } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
+import { formatDistance} from "date-fns";
 
 const JobCard = ({job}) => {
   const navigate = useNavigate();
   
-  const daysAgo = (time) => {
-    const createdAt = new Date(time);
-    const currTime = new Date();
-    const timeDiff = currTime-createdAt;
-
-    return Math.floor(timeDiff/(24*60*60*1000))
-  }
+  
+  const result = formatDistance(new Date(job.createdAt), new Date(),{
+    addSuffix:true
+  })
 
   return (
     <div className='flex flex-col gap-2 p-4 custom-shadow rounded-lg'>
       <div className='flex items-center justify-between mb-1'>
-        <span className='text-sm'>{daysAgo(job.createdAt) === 0 ? 'Today' : `${daysAgo(job.createdAt) }days ago`}</span>
+        <span className='text-sm'>{result}</span>
         <FaRegBookmark />
       </div>
       <div className='flex gap-3 items-center'>
