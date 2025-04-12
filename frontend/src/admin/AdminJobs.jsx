@@ -8,8 +8,7 @@ const AdminJobs = () => {
   useGetAdminJobs()
   const {jobs} = useSelector((state)=>state.job)
   
-
-  if(jobs.length===0){
+  if(!jobs || jobs.length===0){
     return <p>Job not found.</p>
   }
  
