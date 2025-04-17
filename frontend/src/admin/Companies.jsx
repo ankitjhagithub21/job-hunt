@@ -9,11 +9,14 @@ import { useEffect, useState } from "react"
 const Companies = () => {
   useGetAllCompanies()
   const navigate = useNavigate();
-
-
+ 
   const { companies } = useSelector(state => state.company)
+
+  console.log(companies)
+  
   const [filteredCompanies, setFilteredCompanies] = useState(companies)
   const [searchTerm, setSearchTerm] = useState('')
+  
   useEffect(() => {
     setFilteredCompanies(companies.filter((company)=>company.name.toLowerCase().includes(searchTerm)))
   }, [searchTerm])

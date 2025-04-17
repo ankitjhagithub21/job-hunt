@@ -46,7 +46,7 @@ export const getCompany = async (req, res) => {
   try {
     const companies = await Company.find({ userId: req.id });
 
-    res.status(200).json(companies);
+    res.status(200).json({success:true,companies});
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: "Server error.", success: false });

@@ -6,11 +6,13 @@ import { Link } from "react-router-dom"
 
 const AdminJobs = () => {
   useGetAdminJobs()
-  const {jobs} = useSelector((state)=>state.job)
   
-  if(!jobs || jobs.length===0){
-    return <p>Job not found.</p>
-  }
+  const {jobs} = useSelector((state)=>state.job)
+  console.log(jobs)
+   
+ if(!jobs){
+  return <p>Job not found.</p>
+ }
  
   return (
     <div className="h-full w-full p-5">
@@ -28,8 +30,8 @@ const AdminJobs = () => {
 
             </tr>
           </thead>
-          {
-            jobs.length===0 ? <>No Jobs found.</> : <tbody>
+          
+            <tbody>
                 {
                     jobs.map((job)=>{
                         return <tr key={job._id}>
@@ -44,7 +46,7 @@ const AdminJobs = () => {
                     })
                 }
             </tbody>
-          }
+          
 
         </table>
       </div>

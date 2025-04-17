@@ -1,5 +1,5 @@
 import express from "express";
-import { register,login,logout, updateProfile } from "../controllers/user.controller.js";
+import { register,login,logout, updateProfile, getUser } from "../controllers/user.controller.js";
 import { isAuth } from "../middlewares/isAuth.js";
 import { upload } from "../middlewares/multer.js";
 
@@ -14,5 +14,6 @@ router.post("/register",register)
 router.post("/login",login)
 router.post("/update/profile",isAuth,upload.fields(fields),updateProfile)
 router.get("/logout",logout)
+router.get("/auth",isAuth,getUser)
 
 export default router;

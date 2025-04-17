@@ -138,6 +138,21 @@ export const logout = (req, res) => {
     .json({ message: "Log out successfully.", success: true });
 };
 
+export const getUser = async(req, res) => {
+  try{
+    const user = await User.findById(req.id).select("-password")
+    if(!user){
+      res
+      .status(404)
+      .json({ message: "User not found.", success: false });
+    }
+    res.json({ message: "User  found.", success: true,user });
+  }catch(error){
+    console.log(error.message);
+    res.status(500).json({ message: "Server error.", success: false });
+  }
+};
+
 export const updateProfile = async (req, res) => {
   const { fullName, phone, bio, skills } = req.body;
 

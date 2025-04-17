@@ -13,7 +13,9 @@ const useGetAdminJobs = () => {
                  credentials:'include'
              })
              const data = await res.json();
-             dispatch(setJobs(data))
+            if(res.ok){
+                dispatch(setJobs(data))
+            }
          }catch(error){
              console.log(error)
          }

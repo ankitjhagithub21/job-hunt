@@ -3,17 +3,20 @@ import { useDispatch } from 'react-redux'
 import { setCompanies } from '../app/slices/companySlice'
 
 const useGetAllCompanies = () => {
-  const dispatch = useDispatch()
+    const dispatch = useDispatch()
     useEffect(() => {
-        const getCompanyData = async() => {
+        const getCompanyData = async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/companies`,{
-                    credentials:'include'
+                const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/companies`, {
+                    credentials: 'include'
                 });
                 const data = await res.json();
-                dispatch(setCompanies(data))
+            
+                if (data.success) {
+                    dispatch(setCompanies(data.companies))
+                }
             } catch (error) {
-                    console.log(error)
+                console.log(error)
             }
         }
         getCompanyData()
