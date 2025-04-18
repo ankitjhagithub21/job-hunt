@@ -130,11 +130,13 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  return res.cookie("token", "", {
-      maxAge: 0,
-    })
-    .status(200)
-    .json({ message: "Log out successfully.", success: true });
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,        
+    sameSite: "none",     
+  });
+
+  return res.status(200).json({ message: "Log out successfully.", success: true });
 };
 
 export const getUser = async(req, res) => {
