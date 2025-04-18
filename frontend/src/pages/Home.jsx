@@ -1,15 +1,16 @@
 import Hero from "../components/Hero"
 import LatestJobs from "../components/LatestJobs"
+import Reviews from "../components/Reviews";
 import useGetAllJobs from "../hooks/useGetAllJobs"
-import Browse from "./Browse";
 
 const Home = () => {
   useGetAllJobs();
   return (
     <>
-      <Hero/>
-      <LatestJobs/>
-      <Browse/>
+      <Hero />
+      <LatestJobs />
+      <Reviews/>
+
     </>
   )
 }
