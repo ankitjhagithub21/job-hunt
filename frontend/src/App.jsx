@@ -31,10 +31,11 @@ const Applicants = lazy(() => import("./admin/Applicants"));
 const App = () => {
   useGetCurrentUser()
   const dispatch = useDispatch()
+  
   const handleLogout = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/logout`,{
-        credentials:'include'
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/logout`, {
+        credentials: 'include'
       });
 
       if (res.ok) {
@@ -49,7 +50,7 @@ const App = () => {
 
   }
   return (
-    <Suspense fallback={<LoadingPage/>}>
+    <Suspense fallback={<LoadingPage />}>
       <BrowserRouter>
 
         <Routes>

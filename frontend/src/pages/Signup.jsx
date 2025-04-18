@@ -1,16 +1,16 @@
 import { Link, useNavigate } from "react-router-dom"
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaHome } from "react-icons/fa";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading } from "../app/slices/authSlice";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
 const Signup = () => {
   const { isLoading } = useSelector(state => state.auth)
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
@@ -18,23 +18,23 @@ const Signup = () => {
     dispatch(setIsLoading(true))
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/register`,{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
         },
-        body:JSON.stringify(userData)
+        body: JSON.stringify(userData)
       })
       const data = await res.json();
-      if(data.success){
-          toast.success(data.message);
-          navigate("/login")         
-      }else{
+      if (data.success) {
+        toast.success(data.message);
+        navigate("/login")
+      } else {
         toast.error(data.message)
       }
     } catch (error) {
       toast.error(error.message)
-        console.log(error)
+      console.log(error)
     } finally {
       dispatch(setIsLoading(false))
     }
@@ -43,7 +43,12 @@ const Signup = () => {
   return (
     <section className="h-screen w-full flex items-center justify-center p-5">
       <div className="max-w-xl mx-auto custom-shadow p-8 rounded-xl ">
-        <h1 className="text-2xl font-bold  mb-3 text-gray-800">Create Account</h1>
+        <div className="flex items-center justify-between mb-5">
+          <h1 className="text-2xl font-bold  text-gray-800">Signup</h1>
+          <Link to={"/"} className="p-2 rounded-full bg-gray-200 hover:bg-gray-300">
+            <FaHome size={20} color="purple" />
+          </Link>
+        </div>
         <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1">
             <label htmlFor="fullName" className="text-gray-800 text-sm">Full Name</label>

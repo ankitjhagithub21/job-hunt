@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaHome } from "react-icons/fa";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading, setUser } from "../app/slices/authSlice";
@@ -46,7 +46,12 @@ const Login = () => {
   return (
     <section className="h-screen w-full flex items-center justify-center p-5">
       <div className="max-w-xl  mx-auto custom-shadow p-8 rounded-xl ">
-        <h1 className="text-2xl font-bold  mb-3 text-gray-800">Login</h1>
+        <div className="flex items-center justify-between mb-5">
+          <h1 className="text-2xl font-bold  text-gray-800">Login</h1>
+          <Link to={"/"} className="p-2 rounded-full bg-gray-200 hover:bg-gray-300">
+            <FaHome  size={20} color="purple"/>
+          </Link>
+        </div>
         <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
 
           <div className="flex flex-col gap-1">
