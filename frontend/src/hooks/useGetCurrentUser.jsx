@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setUser } from '../app/slices/authSlice'
+import { setUser,setIsLoading } from '../app/slices/authSlice'
 
 
 const useGetCurrentUser = () => {
@@ -20,8 +20,9 @@ const useGetCurrentUser = () => {
                 dispatch(setUser(null))
             }
          }catch(error){
-             console.log(error)
              dispatch(setUser(null))
+         }finally{
+            dispatch(setIsLoading(false))
          }
      }
      getUser()

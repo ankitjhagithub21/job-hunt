@@ -1,9 +1,14 @@
 import { useSelector } from "react-redux";
 import { Link, Navigate, Outlet } from "react-router-dom"
+import LoadingPage from "../pages/LoadingPage";
 
 
 const RecruiterLayout = ({ onLogout }) => {
-  const { user } = useSelector(state => state.auth);
+  const { user,isLoading } = useSelector(state => state.auth);
+
+  if(isLoading){
+    return <LoadingPage/>
+  }
 
   if (!user || user.role !== "recruiter") {
     return <Navigate to={"/"} />

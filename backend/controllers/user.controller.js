@@ -130,11 +130,10 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  return res
-    .status(200)
-    .cookie("token", "", {
+  return res.cookie("token", "", {
       maxAge: 0,
     })
+    .status(200)
     .json({ message: "Log out successfully.", success: true });
 };
 
