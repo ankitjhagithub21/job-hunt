@@ -1,5 +1,7 @@
 import { Company } from "../models/company.model.js";
 import { Job } from "../models/job.model.js";
+import cache from '../utils/cache.js'; 
+
 
 export const postJob = async (req, res) => {
   const {
@@ -68,30 +70,46 @@ export const postJob = async (req, res) => {
   }
 };
 
+
+
 export const getAllJobs = async (req, res) => {
-  const { keyword = "" } = req.query; // Destructuring with default value
+  const { keyword = "" } = req.query;
+  const cacheKey = keyword ? `jobs:search:${keyword}` : "jobs:all";
 
   try {
+  
+    let cachedJobs = cache.get(cacheKey);
+    
+    if (cachedJobs) {
+      cachedJobs = JSON.parse(cachedJobs)
+      return res.status(200).json(cachedJobs);
+    }
+
+    
     const query = keyword
       ? {
           $or: [
             { title: { $regex: keyword, $options: "i" } },
             { description: { $regex: keyword, $options: "i" } },
             { location: { $regex: keyword, $options: "i" } },
-           
-          
           ],
         }
-      : {}; // If there's no keyword, just return all jobs without any filtering
+      : {};
 
-    const jobs = await Job.find(query).populate("company").sort({createdAt:-1});
+    const jobs = await Job.find(query).populate('company').sort({ createdAt: -1 });
 
+   
+    cache.set(cacheKey, JSON.stringify(jobs));
+        
     res.status(200).json(jobs);
   } catch (error) {
-    console.error(error); // Log error for debugging
+    console.error(error);
     res.status(500).json({ message: "Server error.", success: false });
   }
 };
+
+
+
 
 //student
 export const getJobById = async (req, res) => {
