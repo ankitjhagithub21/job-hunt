@@ -18,7 +18,7 @@ const Navbar = ({onLogout}) => {
                 </Link>
                <nav className="flex items-center gap-5">
                  <ul className="flex items-center gap-5">
-                    <li>
+                    <li className="hidden md:block">
                         <Link to={"/"}>Home</Link>
                     </li>
                     <li>
