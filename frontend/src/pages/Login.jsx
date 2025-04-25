@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom"
 import { FaEye, FaEyeSlash, FaHome } from "react-icons/fa";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setIsLoading, setUser } from "../app/slices/authSlice";
+import { useDispatch } from "react-redux";
+import { setUser } from "../app/slices/authSlice";
 import { toast } from "react-toastify"
 
 const Login = () => {
-  const { isLoading } = useSelector(state => state.auth)
+  const [loading,setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Login = () => {
     const formData = new FormData(e.target);
 
     const userData = Object.fromEntries(formData.entries());
-    dispatch(setIsLoading(true))
+   setLoading(true)
 
     try {
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/login`, {
@@ -39,7 +39,7 @@ const Login = () => {
       toast.error(error.message)
       console.log(error)
     } finally {
-      dispatch(setIsLoading(false))
+      setLoading(true)
     }
   }
 
@@ -93,9 +93,9 @@ const Login = () => {
               </div>
             </div>
           </div>
-          <button disabled={isLoading} type="submit" className="p-2 bg-purple-600 rounded-xl text-white cursor-pointer hover:bg-purple-700">
+          <button disabled={loading} type="submit" className="p-2 bg-purple-600 rounded-xl text-white cursor-pointer hover:bg-purple-700">
             {
-              isLoading ? 'Please wait...' : 'Login'
+              loading ? 'Please wait...' : 'Login'
             }
           </button>
         </form>

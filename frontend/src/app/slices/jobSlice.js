@@ -4,7 +4,9 @@ export const jobSlice = createSlice({
   name: 'job',
   initialState:{
     allJobs:[],
-    jobs:[]
+    jobs:[],
+    isLoading:true
+    
   },
   reducers: {
    
@@ -15,9 +17,12 @@ export const jobSlice = createSlice({
     setJobs: (state, action) => {
       state.jobs = action.payload
     },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload
+    },
   },
 })
 
-export const { setJobs ,setAllJobs} = jobSlice.actions
+export const { setJobs ,setAllJobs,setIsLoading} = jobSlice.actions
 
 export default jobSlice.reducer

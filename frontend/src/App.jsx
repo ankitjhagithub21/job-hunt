@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import useGetCurrentUser from "./hooks/useGetCurrentUser";
 import "./App.css";
 import LoadingPage from "./pages/LoadingPage";
+import useGetAllJobs from "./hooks/useGetAllJobs";
 
 // Lazy-loaded components
 const Home = lazy(() => import("./pages/Home"));
@@ -29,7 +30,10 @@ const Applicants = lazy(() => import("./admin/Applicants"));
 
 
 const App = () => {
+  useGetAllJobs()
   useGetCurrentUser()
+  
+
   const dispatch = useDispatch()
   
   const handleLogout = async () => {

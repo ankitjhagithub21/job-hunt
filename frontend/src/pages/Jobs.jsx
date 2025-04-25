@@ -2,8 +2,10 @@ import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import JobCard from '../components/JobCard'
 
+
 const Jobs = () => {
-    const { allJobs } = useSelector(state => state.job)
+    
+    const { allJobs, isLoading } = useSelector(state => state.job)
 
     const [selectedFilters, setSelectedFilters] = useState({
         Location: '',
@@ -56,6 +58,12 @@ const Jobs = () => {
 
         return matchLocation && matchRole && matchSalary
     })
+
+    if (isLoading) {
+        return <div className='flex flex-col items-center justify-center h-screen w-full'>
+            <h1 className='text-3xl font-medium text-gray-600'>Jobs are loading...</h1>
+        </div>
+    }
 
     return (
         <section className='p-5 flex flex-col lg:flex-row text-gray-800 min-h-screen'>
