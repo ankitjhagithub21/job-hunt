@@ -9,8 +9,14 @@ import { useNavigate } from 'react-router-dom';
 
 const LatestJobs = () => {
    
-    const {allJobs} = useSelector(state=>state.job);
+    const {allJobs,isLoading} = useSelector(state=>state.job);
     const navigate = useNavigate();
+
+    if (isLoading) {
+        return <div className='flex flex-col items-center justify-center h-screen w-full'>
+            <h1 className='text-3xl font-medium text-gray-600'>Jobs are loading...</h1>
+        </div>
+    }
 
     if(allJobs.length===0){
         return <p className='text-center py-10 px-5 text-xl'>No job available.</p>
