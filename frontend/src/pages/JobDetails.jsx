@@ -65,7 +65,7 @@ const JobDetails = () => {
     }
 
     return (
-        <section>
+        <section className='min-h-screen'>
             <div className='max-w-5xl mx-auto px-5 py-10'>
                 <div className='flex items-center gap-3 mb-3'>
                     <img src={job.company.logo} alt="" className='w-10 h-10 rounded-lg' />
@@ -104,7 +104,7 @@ const JobDetails = () => {
                     <span className='text-xl'>{job.location}</span>
                 </div>
                 <h2 className='text-shadow-md text-xl my-3'>Requirements</h2>
-                <ul className='list-disc'>
+                <ul className='list-disc p-5'>
                     {
                         job.requirements.map((item, index) => {
                             return <li key={index}>{item}</li>
